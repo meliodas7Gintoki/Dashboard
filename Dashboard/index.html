@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .sidebar {
+    width: 200px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+  }
+
+  .main-content {
+    flex: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+  }
+  .sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 5px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #34495e;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li:hover {
+  background-color: #3d566e;
+}
+.main-content h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.main-content p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+.sidebar ul li button {
+  all: unset;
+  width: 100%;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .main-content {
+    flex: none;
+  }
+}
+.sidebar ul li button.active {
+  background-color: #1abc9c;
+  color: white;
+}
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #2c3e50;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex: 1 1 200px;
+  min-width: 200px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 24px;
+  color: #1abc9c;
+  margin: 10px 0 0;
+}
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode .main-content {
+  background-color: #2e2e2e;
+}
+
+body.dark-mode .card {
+  background-color: #3a3a3a;
+  color: #f0f0f0;
+}
+
+body.dark-mode .sidebar {
+  background-color: #1c1c1c;
+}
+
+body.dark-mode .sidebar ul li {
+  background-color: #2a2a2a;
+}
+
+body.dark-mode .sidebar ul li:hover {
+  background-color: #3c3c3c;
+}
+
+main {
+  flex: 1;
+}
+
+header {
+  background-color: white;
+  padding: 32px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.profile-icon {
+  width: 96px;
+  height: 96px;
+  background-color: #4f7cac;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 24px auto;
+}
+
+.profile-icon span {
+  font-size: 2.5rem;
+  color: white;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2f2f2f;
+  margin-bottom: 8px;
+}
+
+header h2 {
+  font-size: 1.125rem;
+  color: #757575;
+  margin-bottom: 24px;
+}
+
+.message {
+  max-width: 672px;
+  margin: 0 auto;
+  padding: 32px;
+  color: #757575;
+}
+
+.message p {
+  margin-bottom: 16px;
+}
+
+</style>
+
+  </head>
+  <body>
+  <div class="container">
+    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+    <aside class="sidebar">
+      <!-- サイドバー（メニュー） -->
+      <h2>Menu</h2>
+      <ul>
+        <li><button onclick="showContent('home')"><i class="fas fa-home"></i> Home</button></li>
+        <li><button onclick="showContent('profile')"><i class="fas fa-user"></i> Profile</button></li>
+        <li><button onclick="showContent('settings')"><i class="fas fa-cog"></i> Settings</button></li>
+      </ul>
+  
+    </aside>
+  
+    <main class="main-content">
+
+      <section id="home">
+        <header>
+          <div class="profile-icon">
+            <span class="ri-user-smile-line"></span>
+          </div>
+          <h1>Welcome to Your Personal Dashboard</h1>
+          <h2>Make your daily life more convenient and enjoyable</h2>
+        </header>
+        <div class="message">
+          <p>This dashboard is a tool to enrich your daily life. You can easily use essential features such as diary entries,
+            memo management, and checking weather information.</p>
+          <p>Small daily records become irreplaceable memories, and efficient task management leads to fulfilling days. Please
+            use this as a partner that supports your everyday life.</p>
+        </div>
+      </section>
+
+      <!-- ↓ Home用セクション -->
+      <section id="home-section">
+        <h1>Welcome to the Dashboard</h1>
+        <p>This is your main content area.</p>
+        <div class="cards">
+          <!-- カードはこの中にある -->
+        </div>
+      </section>
+     
+
+      <!-- ↓ Profile用セクション -->
+      <section id="profile-section" style="display:none;">
+        <h1>Your Profile</h1>
+        <p>Update your personal information below.</p>
+        <form style="max-width: 400px;">
+          <label for="name">Name</label><br />
+          <input type="text" id="name" name="name" placeholder="Enter your name"
+            style="width:100%; padding:8px; margin-bottom:10px;" /><br />
+  
+          <label for="email">Email</label><br />
+          <input type="email" id="email" name="email" placeholder="Enter your email"
+            style="width:100%; padding:8px; margin-bottom:10px;" /><br />
+  
+          <button type="submit"
+            style="padding:10px 20px; background-color:#1abc9c; color:white; border:none; border-radius:4px; cursor:pointer;">
+            Save
+          </button>
+        </form>
+      </section>
+  
+      <!-- ↓ Settings用セクション -->
+      <section id="settings-section" style="display:none;">
+        <h1>Settings</h1>
+        <p>Change your preferences and configurations here.</p>
+  
+        <div style="margin-top: 20px;">
+          <label for="theme-toggle">Dark Mode:</label>
+          <input type="checkbox" id="theme-toggle" />
+        </div>
+      </section>
+  
+    </main>
+
+
+  </div>
+
+ 
+  
+
+
+  <script>
+    
+    function generateCards() {
+      const data = [
+        { icon: 'fas fa-users', label: 'Users', value: '1,200' },
+        { icon: 'fas fa-comments', label: 'Messages', value: '450' },
+        { icon: 'fas fa-check-circle', label: 'Tasks Completed', value: '87' }
+      ];
+
+      const cardContainer = document.querySelector('.cards');
+      cardContainer.innerHTML = ''; // カードを一旦クリア
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+        <h3><i class="${item.icon}"></i> ${item.label}</h3>
+        <p>${item.value}</p>
+      `;
+        cardContainer.appendChild(card);
+      });
+    }
+    
+    function showContent(page) {
+        const sections = ['home', 'profile', 'settings'];
+
+        sections.forEach(sec => {
+          document.getElementById(`${sec}-section`).style.display = sec === page ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('.sidebar ul li button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+
+        const clickedBtn = Array.from(document.querySelectorAll('.sidebar ul li button'))
+          .find(btn => btn.textContent.trim().includes(page.charAt(0).toUpperCase() + page.slice(1)));
+        if (clickedBtn) clickedBtn.classList.add('active');
+
+        document.querySelector('.sidebar').classList.remove('active');
+
+        // 💡 Homeを表示する時だけカードを生成
+        if (page === 'home') {
+          generateCards();
+        }
+      }
+
+    // 初期表示でHomeのカードを生成（ページ読み込み直後用）
+    window.addEventListener('DOMContentLoaded', () => {
+      showContent('home');
+   
+      document.getElementById('name').value = localStorage.getItem('userName') || '';
+      document.getElementById('email').value = localStorage.getItem('userEmail') || '';
+    });
+
+    document.getElementById('theme-toggle').addEventListener('change', function () {
+        document.body.classList.toggle('dark-mode', this.checked);
+      });
+  
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+        document.querySelector('.sidebar').classList.toggle('active');
+      });
+  
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+        alert('Profile saved!');
+      });
+
+     
+
+      
+  </script>
+
+  </body>
+</html>
